@@ -1,0 +1,34 @@
+version: '2'
+services:
+  factorio-master:
+    build: ./build
+    volumes:
+      - ./volumes/sharedPlugins:/factorioClusterio/sharedPluginsVolume
+      - ./volumes/sharedMods:/factorioClusterio/sharedModsVolume
+      - ./volumes/instances/:/factorioClusterio/instances
+      - ./volumes/database/:/factorioClusterio/database
+      - ./volumes/config.json:/factorioClusterio/config.json
+      - ./volumes/secret-api-token.txt:/factorioClusterio/secret-api-token.txt
+    ports:
+      - 8080:8080
+    environment:
+      - RCONPORT=34198
+      - FACTORIOPORT=34197
+      - MODE=master
+    restart: always
+  factorio-slave:
+    build: ./build
+    volumes:
+      - ./volumes/instances/:/factorioClusterio/instances/
+      - ./volumes/config.json:/factorioClusterio/config.json
+    ports:
+      - 34197:34197/udp
+      - 34198:34198
+    environment:
+      - RCONPORT=34198
+      - FACTORIOPORT=34197
+      - MODE=client
+      - INSTANCE=YOURINSTANCENAME
+    depends_on:
+      - factorio-master
+    restart: always
