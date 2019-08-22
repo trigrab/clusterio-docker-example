@@ -14,12 +14,12 @@ if [ -d "sharedMods" ]; then
 fi
 node client.js download
 
-if [ -d "sharedPlugins" ] && [ -n "$(ls -A "sharedPlugins")" ]; then
+if [ -d "sharedPlugins" ] && [ "$(ls -A "sharedPlugins")" ]; then
     echo "copy plugins from git to actual sharedMods" 
     cp -Rv sharedPluginsDist/* sharedPlugins/
 else
     echo "no shared plugins from outside docker"
-    mv sharedPluginsDist sharedPlugins
+    mv sharedPluginsDist/* sharedPlugins/
 fi
 
 # Hand off to the CMD

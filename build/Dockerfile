@@ -15,7 +15,7 @@ LABEL maintainer "Sir3lit@gmail.com"
 
 EXPOSE 8080 34167
 
-RUN mv sharedPlugins sharedPluginsDist
+RUN mv sharedPlugins sharedPluginsDist && mkdir sharedPlugins
 
 COPY entrypoint.sh /factorioClusterio/
 
