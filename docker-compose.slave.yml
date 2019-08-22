@@ -1,0 +1,18 @@
+version: '2'
+services:
+  factorio-slave:
+    build: ./build
+    volumes:
+      - ./volumes/instances/:/factorioClusterio/instances/
+      - ./volumes/config.json:/factorioClusterio/config.json
+      - ./volumes/sharedMods:/factorioClusterio/sharedMods
+      - ./volumes/sharedPlugins:/factorioClusterio/sharedPlugins
+    ports:
+      - 34197:34197/udp
+      - 34198:34198
+    environment:
+      - RCONPORT=34198
+      - FACTORIOPORT=34197
+      - MODE=client
+      - INSTANCE=YOURINSTANCENAME
+    restart: always
