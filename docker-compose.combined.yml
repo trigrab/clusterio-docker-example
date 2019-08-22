@@ -3,8 +3,8 @@ services:
   factorio-master:
     build: ./build
     volumes:
-      - ./volumes/sharedPlugins:/factorioClusterio/sharedPluginsVolume
-      - ./volumes/sharedMods:/factorioClusterio/sharedModsVolume
+      - ./volumes/sharedPluginsMaster:/factorioClusterio/sharedPlugins
+      - ./volumes/sharedModsMaster:/factorioClusterio/sharedMods
       - ./volumes/instances/:/factorioClusterio/instances
       - ./volumes/database/:/factorioClusterio/database
       - ./volumes/config.json:/factorioClusterio/config.json
@@ -21,6 +21,8 @@ services:
     volumes:
       - ./volumes/instances/:/factorioClusterio/instances/
       - ./volumes/config.json:/factorioClusterio/config.json
+      - ./volumes/sharedMods:/factorioClusterio/sharedMods
+      - ./volumes/sharedPlugins:/factorioClusterio/sharedPlugins
     ports:
       - 34197:34197/udp
       - 34198:34198
