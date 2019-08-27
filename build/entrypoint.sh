@@ -1,24 +1,17 @@
 #!/bin/bash
 
-#if [ -d "sharedModsVolume" ] && [ -n "$(ls -A "sharedModsVolume")" ]; then
-#    echo "copy mods from volume to actual sharedMods" 
-#    cp -Rv sharedModsVolume/* sharedMods/
-#
-#else
-#    echo "no shared mods from outside docker"
-#fi
-
-# instead of copying this install clusterio to volume
-if [ -d "sharedMods" ]; then
+# install clusterio into sharedMods in case the user mounts a new volume there
+if [ ! -d "sharedMods" ]; then
     mkdir sharedMods
 fi
 node client.js download
 
+# try to install deault plugins from git, in case the user mounts a new volume there
 if [ -d "sharedPlugins" ] && [ "$(ls -A "sharedPlugins")" ]; then
-    echo "copy plugins from git to actual sharedMods" 
+    echo "copy default plugins to actual sharedMods folder" 
     cp -Rv sharedPluginsDist/* sharedPlugins/
 else
-    echo "no shared plugins from outside docker"
+    echo "no shared plugins volume mounted, copy default plugins"
     mv sharedPluginsDist/* sharedPlugins/
 fi
 
