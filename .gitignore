@@ -1,3 +1,5 @@
 volumes/*
 !volumes/.gitempty
+!volumes/master/.gitempty
+!volumes/slave/.gitempty
 docker-compose.yml

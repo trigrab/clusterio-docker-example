@@ -3,10 +3,10 @@ services:
   factorio-slave:
     build: ./build
     volumes:
-      - ./volumes/instances/:/factorioClusterio/instances/
-      - ./volumes/config.json:/factorioClusterio/config.json
-      - ./volumes/sharedMods:/factorioClusterio/sharedMods
-      - ./volumes/sharedPlugins:/factorioClusterio/sharedPlugins
+      - ./volumes/slave/instances/:/factorioClusterio/instances/
+      - ./volumes/slave/config.json:/factorioClusterio/config.json
+      - ./volumes/slave/sharedMods:/factorioClusterio/sharedMods
+      - ./volumes/slave/sharedPlugins:/factorioClusterio/sharedPlugins
     ports:
       - 34197:34197/udp
       - 34198:34198
