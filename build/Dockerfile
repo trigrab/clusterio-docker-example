@@ -10,6 +10,7 @@ RUN mkdir instances sharedMods
 RUN cp config.json.dist config.json
 
 RUN node client.js download
+RUN node ./lib/npmPostinstall.js
 
 LABEL maintainer "Sir3lit@gmail.com"
 
