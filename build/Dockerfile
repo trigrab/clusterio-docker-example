@@ -1,5 +1,5 @@
-FROM node:9-alpine
-RUN apk update && apk add git curl tar alpine-sdk python xz
+FROM node:9.11.2
+RUN apt-get update && apt install git curl tar -y
 RUN mkdir factorioClusterio
 
 RUN git clone -b master https://github.com/clusterio/factorioClusterio.git && cd factorioClusterio && npm install --only=production
