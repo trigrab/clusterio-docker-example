@@ -1,0 +1,19 @@
+version: '2'
+services:
+  factorio-master:
+    build: ./build
+    volumes:
+      - "/etc/localtime:/etc/localtime:ro"
+      - "/etc/timezone:/etc/timezone:ro"
+      - ./volumes/master/sharedPlugins:/factorioClusterio/sharedPlugins
+      - ./volumes/master/sharedMods:/factorioClusterio/sharedMods
+      - ./volumes/master/database/:/factorioClusterio/database
+      - ./volumes/master/config.json:/factorioClusterio/config.json
+      - ./volumes/master/secret-api-token.txt:/factorioClusterio/secret-api-token.txt
+    ports:
+      - 8080:8080
+    environment:
+      - RCONPORT=34198
+      - FACTORIOPORT=34197
+      - MODE=master
+    restart: always
