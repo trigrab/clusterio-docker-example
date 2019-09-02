@@ -3,6 +3,8 @@ services:
   factorio-slave:
     build: ./build
     volumes:
+      - "/etc/localtime:/etc/localtime:ro"
+      - "/etc/timezone:/etc/timezone:ro"
       - ./volumes/slave/instances/:/factorioClusterio/instances/
       - ./volumes/slave/config.json:/factorioClusterio/config.json
       - ./volumes/slave/sharedMods:/factorioClusterio/sharedMods
