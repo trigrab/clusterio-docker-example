@@ -1,5 +1,5 @@
 FROM node:9.11.2
-RUN apt-get update && apt install git curl tar -y
+RUN apt-get update && apt-get install -y git curl tar
 RUN mkdir factorioClusterio
 
 RUN git clone -b 1.2.x https://github.com/clusterio/factorioClusterio.git && cd factorioClusterio && npm install --only=production
@@ -12,7 +12,7 @@ RUN cp config.json.dist config.json
 RUN node client.js download
 RUN node ./lib/npmPostinstall.js
 
-LABEL maintainer "Sir3lit@gmail.com"
+LABEL maintainer "trigrab@gmail.com"
 
 EXPOSE 8080 34167
 
