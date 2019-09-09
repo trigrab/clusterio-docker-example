@@ -2,8 +2,11 @@ FROM node:9.11.2
 RUN apt-get update && apt-get install -y git curl tar
 RUN mkdir factorioClusterio
 
-RUN git clone -b 1.2.x https://github.com/clusterio/factorioClusterio.git && cd factorioClusterio && npm install --only=production
-RUN cd factorioClusterio && curl -o factorio.tar.gz -L https://www.factorio.com/get-download/latest/headless/linux64 && tar -xf factorio.tar.gz
+
+ARG BRANCH=1.2.x
+ARG FACTORIO_VERSION=latest
+RUN git clone -b ${BRANCH} https://github.com/clusterio/factorioClusterio.git && cd factorioClusterio && npm install --only=production
+RUN cd factorioClusterio && curl -o factorio.tar.gz -L https://www.factorio.com/get-download/${FACTORIO_VERSION}/headless/linux64 && tar -xf factorio.tar.gz
 
 WORKDIR factorioClusterio
 RUN mkdir instances sharedMods
